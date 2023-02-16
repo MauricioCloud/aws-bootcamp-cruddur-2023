@@ -18,4 +18,6 @@ Created Lucid Chart:
 
 https://lucid.app/lucidchart/a5195f3f-30bb-4859-bd0f-ebb558d18808/edit?invitationId=inv_8b26de0f-2ff9-441c-a758-fec4d329eedd
 
-Cheers!
+Draw Napkin Conceptual design
+
+Watched sec Videos.
