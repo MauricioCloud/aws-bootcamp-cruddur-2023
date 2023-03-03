@@ -5,8 +5,8 @@ Attended Live Week 1 Bootcamp.
 Got on the Live Follow UP to create the Container:
 
 Successfully built cd07fc90e290
+
 Successfully tagged backend-flask:latest
-gitpod /workspace/aws-bootcamp-cruddur-2023 (main) $ 
 
 Got Lost at the Live class after noticed that I connected gitpod to Visual Code desktop instead of the Browser Plug. Reconfigured the gitpod to open directly in browser and got better responses from the code. But then I got lost and the class was over.
 
