@@ -3,34 +3,8 @@ import React from "react";
 import {ReactComponent as Logo} from '../components/svg/logo.svg';
 import { Link } from "react-router-dom";
 
-const [cognitoErrors, setCognitoErrors] = React.useState('');
-
-const onsubmit = async (event) => {
-  setCognitoErrors('')
-  event.preventDefault();
-  try {
-    Auth.signIn(username, password)
-      .then(user => {
-        localStorage.setItem("access_token", user.signInUserSession.accessToken.jwtToken)
-        window.location.href = "/"
-      })
-      .catch(err => { console.log('Error!', err) });
-  } catch (error) {
-    if (error.code == 'UserNotConfirmedException') {
-      window.location.href = "/confirm"
-    }
-    setCognitoErrors(error.message)
-  }
-  return false
-}
-
-let errors;
-if (cognitoErrors){
-  errors = <div className='errors'>{cognitoErrors}</div>;
-}
-
-// just before submit component
-{errors}
+// [TODO] Authenication
+import { Auth } from 'aws-amplify';
 
 export default function SigninPage() {
 
@@ -39,18 +13,22 @@ export default function SigninPage() {
   const [errors, setErrors] = React.useState('');
 
   const onsubmit = async (event) => {
-    event.preventDefault();
     setErrors('')
-    console.log('onsubmit')
-    if (Cookies.get('user.email') === email && Cookies.get('user.password') === password){
-      Cookies.set('user.logged_in', true)
+    event.preventDefault();
+    Auth.signIn(email, password)
+    .then(user => {
+      localStorage.setItem("access_token", user.signInUserSession.accessToken.jwtToken)
       window.location.href = "/"
-    } else {
-      setErrors("Email and password is incorrect or account doesn't exist")
-    }
+    })
+    .catch(error => { 
+      if (error.code == 'UserNotConfirmedException') {
+        window.location.href = "/confirm"
+      }
+      setErrors(error.message)
+    });
     return false
   }
-
+  
   const email_onchange = (event) => {
     setEmail(event.target.value);
   }
@@ -58,12 +36,12 @@ export default function SigninPage() {
     setPassword(event.target.value);
   }
 
-  let el_errors;
-  if (errors){
-    el_errors = <div className='errors'>{errors}</div>;
-  }
+let errors;
+if (cognitoErrors){
+  errors = <div className='errors'>{cognitoErrors}</div>;
+}
 
-  return (
+return (
     <article className="signin-article">
       <div className='signin-info'>
         <Logo className='logo' />
