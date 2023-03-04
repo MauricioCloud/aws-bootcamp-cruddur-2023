@@ -13,9 +13,6 @@ const signOut = async () => {
   }
 }
 
-// [TODO] Authenication
-import Cookies from 'js-cookie'
-
 export default function ProfileInfo(props) {
   const [popped, setPopped] = React.useState(false);
 
