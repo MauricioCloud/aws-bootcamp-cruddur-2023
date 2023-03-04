@@ -1,6 +1,17 @@
 import './ProfileInfo.css';
 import {ReactComponent as ElipsesIcon} from './svg/elipses.svg';
 import React from "react";
+import { Auth } from 'aws-amplify';
+
+
+const signOut = async () => {
+  try {
+      await Auth.signOut({ global: true });
+      window.location.href = "/"
+  } catch (error) {
+      console.log('error signing out: ', error);
+  }
+}
 
 // [TODO] Authenication
 import Cookies from 'js-cookie'
